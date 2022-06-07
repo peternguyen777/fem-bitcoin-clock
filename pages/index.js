@@ -16,7 +16,7 @@ export default function Home() {
       <main className='my-0'>
         {day ? (
           <>
-            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
+            <div className='relative h-full w-full overflow-hidden sm:hidden'>
               <Image
                 src='/mobile/bg-image-daytime.jpg'
                 alt=''
@@ -25,7 +25,7 @@ export default function Home() {
                 quality={100}
               />
             </div>
-            <div className='relative hidden h-screen w-full overflow-hidden sm:flex md:hidden'>
+            <div className='relative hidden h-full w-full overflow-hidden sm:flex md:hidden'>
               <Image
                 src='/tablet/bg-image-daytime.jpg'
                 alt=''
@@ -46,7 +46,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
+            <div className='relative h-full w-full overflow-hidden sm:hidden'>
               <Image
                 src='/mobile/bg-image-nighttime.jpg'
                 alt=''
