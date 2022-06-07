@@ -58,7 +58,7 @@ export default function Home() {
               )}
               <h6 className='ml-4 leading-[25px] tracking-[3px] text-white'>
                 {day ? "Good Morning" : "Good Evening"}
-                <span className='hidden sm:inline-block'>, It's Currently</span>
+                <span className='hidden sm:inline-block'>{`, It's Currently`}</span>
               </h6>
             </div>
             <div className='mb-4'>
