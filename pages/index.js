@@ -25,7 +25,7 @@ export default function Home() {
       </Head>
 
       <main className='select-none'>
-        <div className='absolute z-20 flex h-full w-full flex-col justify-between px-[26px] pt-8 pb-10 sm:pl-16 sm:pr-32 sm:pt-20 xl:px-[165px]'>
+        <div className='absolute z-20 flex h-full w-full flex-col justify-between px-[26px] pt-8 pb-10 sm:pl-16 sm:pr-32 sm:pt-20 sm:pb-16 xl:px-[165px] xl:pt-14 xl:pb-24'>
           <div className='flex justify-between xl:justify-start'>
             <div>
               <p className='mb-2 text-[12px] leading-[22px] text-white sm:mb-3 sm:text-[18px] sm:leading-[28px] xl:w-[540px]'>
