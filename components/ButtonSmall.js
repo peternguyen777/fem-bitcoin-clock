@@ -18,14 +18,14 @@ const ButtonSmall = (props) => {
             xmlns='http://www.w3.org/2000/svg'
             className=''
           >
-            <g fill='none' fill-rule='evenodd'>
+            <g fill='none' fillRule='evenodd'>
               {/* <circle fill='#303030' cx='20' cy='20' r='20' /> */}
-              <path stroke='#FFF' stroke-width='2' d='M14 23l6-6 6 6' />
+              <path stroke='#FFF' strokeWidth='2' d='M14 23l6-6 6 6' />
             </g>
           </svg>
         ) : (
           <svg width='14' height='9' xmlns='http://www.w3.org/2000/svg'>
-            <path stroke='#FFF' stroke-width='2' fill='none' d='m1 1 6 6 6-6' />
+            <path stroke='#FFF' strokeWidth='2' fill='none' d='m1 1 6 6 6-6' />
           </svg>
         )}
       </div>
