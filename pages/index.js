@@ -23,7 +23,7 @@ export default function Home() {
       <main>
         <div className='absolute z-20 flex h-screen flex-col justify-between px-[26px] pt-8 pb-10 sm:pl-16 sm:pr-32 sm:pt-20'>
           <div className='flex justify-between'>
-            <div className=''>
+            <div>
               <p className='mb-2 text-[12px] leading-[22px] text-white sm:mb-3 sm:text-[18px] sm:leading-[28px]'>
                 “The science of operations, as derived from mathematics more
                 especially, is a science of itself, and has its own abstract
@@ -33,11 +33,14 @@ export default function Home() {
                 Ada Lovelace
               </p>
             </div>
-            <img
-              src='/desktop/icon-refresh.svg'
-              alt=''
-              className='ml-4 h-[18px] w-[18px]'
-            />
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='ml-4 w-[18px] cursor-pointer fill-[#fff] pt-2 opacity-50 hover:opacity-100'
+              >
+                <path d='M7.188 10.667a.208.208 0 01.147.355l-2.344 2.206a5.826 5.826 0 009.578-2.488l2.387.746A8.322 8.322 0 013.17 14.94l-2.149 2.022a.208.208 0 01-.355-.148v-6.148h6.52zm7.617-7.63L16.978.958a.208.208 0 01.355.146v6.23h-6.498a.208.208 0 01-.147-.356L13 4.765A5.825 5.825 0 003.43 7.26l-2.386-.746a8.32 8.32 0 0113.76-3.477z' />
+              </svg>
+            </div>
           </div>
           <div>
             <div className='mb-4 flex items-center'>
