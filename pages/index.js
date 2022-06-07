@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [day, setDay] = useState(false);
+  const [day, setDay] = useState(true);
 
   return (
     <div>
@@ -13,10 +13,10 @@ export default function Home() {
         <link rel='icon' href='/favicon-32x32.png' />
       </Head>
 
-      <main className='my-0'>
+      <main>
         {day ? (
           <>
-            <div className='relative h-full w-full overflow-hidden sm:hidden'>
+            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
               <Image
                 src='/mobile/bg-image-daytime.jpg'
                 alt=''
@@ -25,7 +25,7 @@ export default function Home() {
                 quality={100}
               />
             </div>
-            <div className='relative hidden h-full w-full overflow-hidden sm:flex md:hidden'>
+            <div className='relative hidden h-screen w-full overflow-hidden sm:flex md:hidden'>
               <Image
                 src='/tablet/bg-image-daytime.jpg'
                 alt=''
@@ -46,7 +46,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div className='relative h-full w-full overflow-hidden sm:hidden'>
+            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
               <Image
                 src='/mobile/bg-image-nighttime.jpg'
                 alt=''
@@ -64,7 +64,6 @@ export default function Home() {
                 quality={100}
               />
             </div>
-
             <div className='relative hidden h-screen w-full overflow-hidden md:flex'>
               <Image
                 src='/desktop/bg-image-nighttime.jpg'
