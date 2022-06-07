@@ -78,7 +78,7 @@ export default function Home() {
             <ButtonSmall expander={menuToggle} onClick={menuToggleHandler} />
           </div>
         </div>
-        <div className='absolute z-10 h-full w-full bg-black opacity-40'></div>
+        <div className='absolute z-10 h-screen w-full bg-black opacity-40'></div>
 
         <BackgroundImages day={day} />
       </main>
