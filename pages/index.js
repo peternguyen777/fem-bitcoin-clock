@@ -1,9 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
+import ButtonSmall from "../components/ButtonSmall";
+import BackgroundImages from "../components/BackgroundImages";
 
 export default function Home() {
   const [day, setDay] = useState(true);
+  const [menuToggle, setMenuToggle] = useState(false);
+
+  const menuToggleHandler = () => {
+    setMenuToggle(!menuToggle);
+  };
 
   return (
     <div>
@@ -14,67 +21,63 @@ export default function Home() {
       </Head>
 
       <main>
-        {day ? (
-          <>
-            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
-              <Image
-                src='/mobile/bg-image-daytime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
+        <div className='absolute z-20 flex h-screen flex-col justify-between px-[26px] pt-8 pb-10 sm:pl-16 sm:pr-32 sm:pt-20'>
+          <div className='flex justify-between'>
+            <div className=''>
+              <p className='mb-2 text-[12px] leading-[22px] text-white sm:mb-3 sm:text-[18px] sm:leading-[28px]'>
+                “The science of operations, as derived from mathematics more
+                especially, is a science of itself, and has its own abstract
+                truth and value.”
+              </p>
+              <p className='text-[12px] font-bold leading-[22px] text-white sm:text-[18px] sm:leading-[28px]'>
+                Ada Lovelace
+              </p>
             </div>
-            <div className='relative hidden h-screen w-full overflow-hidden sm:flex md:hidden'>
-              <Image
-                src='/tablet/bg-image-daytime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
+            <img
+              src='/desktop/icon-refresh.svg'
+              alt=''
+              className='ml-4 h-[18px] w-[18px]'
+            />
+          </div>
+          <div>
+            <div className='mb-4 flex items-center'>
+              {day ? (
+                <Image
+                  src='/desktop/icon-sun.svg'
+                  alt=''
+                  height={24}
+                  width={24}
+                />
+              ) : (
+                <Image
+                  src='/desktop/icon-moon.svg'
+                  alt=''
+                  height={24}
+                  width={23}
+                />
+              )}
+              <h6 className='ml-4 leading-[25px] tracking-[3px] text-white'>
+                {day ? "Good Morning" : "Good Evening"}
+                <span className='hidden sm:inline-block'>, It's Currently</span>
+              </h6>
             </div>
-            <div className='relative hidden h-screen w-full overflow-hidden md:flex'>
-              <Image
-                src='/desktop/bg-image-daytime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
+            <div className='mb-4'>
+              <h1 className='inline-block align-baseline text-[100px] leading-[100px] text-white sm:text-[175px] sm:leading-[175px]'>
+                23:37
+                <span className='font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white sm:text-[32px] sm:leading-[28px]'>
+                  BST
+                </span>
+              </h1>
             </div>
-          </>
-        ) : (
-          <>
-            <div className='relative h-screen w-full overflow-hidden sm:hidden'>
-              <Image
-                src='/mobile/bg-image-nighttime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
-            </div>
-            <div className='relative hidden h-screen w-full sm:flex md:hidden'>
-              <Image
-                src='/tablet/bg-image-nighttime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
-            </div>
-            <div className='relative hidden h-screen w-full overflow-hidden md:flex'>
-              <Image
-                src='/desktop/bg-image-nighttime.jpg'
-                alt=''
-                layout='fill'
-                objectFit='cover'
-                quality={100}
-              />
-            </div>
-          </>
-        )}
+            <h6 className='mb-12 font-bold text-white sm:tracking-[3.6px]'>
+              in LONDON, UK
+            </h6>
+            <ButtonSmall expander={menuToggle} onClick={menuToggleHandler} />
+          </div>
+        </div>
+        <div className='absolute z-10 h-full w-full bg-black opacity-40'></div>
+
+        <BackgroundImages day={day} />
       </main>
 
       <footer></footer>
