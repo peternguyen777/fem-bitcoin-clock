@@ -137,7 +137,7 @@ export default function Home() {
               menuToggle
                 ? `lg:my-auto lg:pt-0 lg:pb-0`
                 : `h-full justify-between lg:pt-14 lg:pb-24`
-            } flex w-full flex-col px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 lg:px-[165px] `}
+            } flex w-full flex-col px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 md:pt-20 md:pb-16 lg:px-[165px] `}
           >
             <div
               className={`${
