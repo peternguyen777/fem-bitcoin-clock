@@ -70,7 +70,8 @@ export default function Home() {
       //parse location eg. Sydney, Australia
       let text = data.timezone;
       let myArray = text.split("/").reverse();
-      let timeZone = myArray.join(", ");
+      // let timeZone = myArray.join(", ");
+      let timeZone = myArray[0];
 
       //parse time (eg. 12:44) and AM/PM
       let str = data.datetime;
@@ -98,8 +99,8 @@ export default function Home() {
   }, [fetchTimeHandler]);
 
   useEffect(() => {
-    let HH = worldTime.time.split(":");
-    let hours = parseFloat(HH);    
+    let HH = worldTime.time;
+    let hours = parseFloat(HH);   
 
     if (hours >= 6 && hours < 18 ) {
       setDay(true);
