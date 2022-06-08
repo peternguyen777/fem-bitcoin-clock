@@ -133,7 +133,7 @@ export default function Home() {
               menuToggle
                 ? `lg:my-auto lg:pt-0 lg:pb-0`
                 : `h-full justify-between lg:pt-14 lg:pb-24`
-            } flex w-full flex-col  px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 lg:px-[165px] `}
+            } flex w-full flex-col px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 lg:px-[165px] `}
           >
             <div
               className={`${
@@ -158,17 +158,17 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-
             <div
-              className={`            
-              transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between
+              className=
+              // {`            
+              'transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between'
               
-               ${
-                 menuToggle
-                   ? `translate-y-0`
-                   : `translate-y-[256px] sm:translate-y-[440px] lg:translate-y-[400px]`
-               }
-              `}
+              //  ${
+              //    menuToggle
+              //      ? ``
+              //      : `translate-y-[256px] sm:translate-y-[440px] lg:translate-y-[400px]`
+              //  }
+              // `}
             >
               <div>
                 <div className='mb-4 flex items-center'>
@@ -216,7 +216,7 @@ export default function Home() {
             <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
           )} */}
 
-          <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
+          {menuToggle && <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />}       
         </div>
         <div className='absolute z-10 h-screen w-full bg-black opacity-40'></div>
 
