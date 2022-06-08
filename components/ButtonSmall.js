@@ -4,7 +4,7 @@ import Image from "next/image";
 const ButtonSmall = (props) => {
   return (
     <div
-      className='flex h-[39px] w-[115px] cursor-pointer items-center justify-between rounded-full bg-white pl-[17px] pr-[4px] sm:h-[56px] sm:w-[146px] sm:pl-[21px] sm:pr-[9px]'
+      className='flex h-[39px] w-[115px] cursor-pointer items-center justify-between rounded-full bg-white pl-[17px] pr-[4px] sm:h-[56px] sm:w-[146px] sm:pl-[21px] sm:pr-[9px] lg:absolute lg:right-0 lg:bottom-0'
       onClick={props.onClick}
     >
       <h6 className='select-none text-[12px] font-bold leading-[14px] tracking-[3.75px] opacity-50 sm:text-[16px] sm:leading-[28px] sm:tracking-[5px]'>
