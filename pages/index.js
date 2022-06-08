@@ -4,12 +4,15 @@ import { useState, useCallback, useEffect } from "react";
 import ButtonSmall from "../components/ButtonSmall";
 import BackgroundImages from "../components/BackgroundImages";
 import ModalExpand from "../components/ModalExpand";
+import moment from "moment";
 
 export default function Home() {
-  const [day, setDay] = useState(true);
+  const [day, setDay] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
 
   const [quotes, setQuotes] = useState([]);
+  const [worldTime, setWorldTime] = useState({});
+
   const [currentQuote, setCurrentQuote] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -53,6 +56,54 @@ export default function Home() {
   useEffect(() => {
     fetchQuotesHandler();
   }, [fetchQuotesHandler]);
+
+  const fetchTimeHandler = useCallback(async () => {
+    try {
+      const response = await fetch("https://worldtimeapi.org/api/ip/");
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const data = await response.json();
+
+      //parse location eg. Sydney, Australia
+      let text = data.timezone;
+      let myArray = text.split("/").reverse();
+      let timeZone = myArray.join(", ");
+
+      //parse time (eg. 12:44) and AM/PM
+      let str = data.datetime;
+      let time = moment(str).format("HH:mm");
+      let ampm = moment(str).format("A");
+
+      const transformedWorldTime = {
+        timezone: timeZone,
+        time: time,
+        ampm: ampm,
+        abbreviation: data.abbreviation,
+        dayOfYear: data.day_of_year,
+        dayOfWeek: data.day_of_week,
+        weekNumber: data.week_number,
+      };
+
+      setWorldTime(transformedWorldTime);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTimeHandler();
+  }, [fetchTimeHandler]);
+
+  useEffect(() => {
+    if (worldTime.ampm === "AM") {
+      setDay(true);
+    } else {
+      setDay(false);
+    }
+  }, [worldTime.ampm]);
 
   const quoteToggleHandler = async () => {
     let randomQuoteInt = Math.floor(Math.random() * quotes.length);
@@ -128,14 +179,14 @@ export default function Home() {
                 </div>
                 <div className='mb-4'>
                   <h1 className='inline-block align-baseline text-[100px] leading-[100px] text-white md:text-[175px] md:leading-[175px] lg:text-[200px] lg:leading-[200px]'>
-                    23:37
+                    {worldTime.time}
                     <span className='font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white md:text-[32px] md:leading-[28px] lg:text-[40px]'>
-                      BST
+                      {worldTime.abbreviation}
                     </span>
                   </h1>
                 </div>
                 <h6 className='mb-12 font-bold text-white md:tracking-[3.6px] lg:mb-0 lg:text-[24px] lg:leading-[28px] lg:tracking-[4.8px]'>
-                  in LONDON, UK
+                  in {worldTime.timezone}
                 </h6>
               </div>
               <div className='relative'>
@@ -146,7 +197,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {menuToggle && <ModalExpand day={day} menuToggle={menuToggle} />}{" "}
+          {menuToggle && (
+            <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
+          )}{" "}
         </div>
         <div className='absolute z-10 h-screen w-full bg-black opacity-40'></div>
 

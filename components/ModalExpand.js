@@ -15,7 +15,7 @@ const ModalExpand = (props) => {
             Current Time Zone
           </h6>
           <h5 className='text-right text-[20px] leading-[24px] sm:text-left sm:text-[40px] sm:leading-[48px] lg:mr-24 lg:text-[56px] lg:leading-[68px] xl:mr-0'>
-            Europe, London
+            {props.data.timezone}
           </h5>
         </div>
         <div className='flex items-center justify-between sm:flex-col sm:items-start'>
@@ -23,7 +23,7 @@ const ModalExpand = (props) => {
             Day of the Year
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            295
+            {props.data.dayOfYear}
           </h5>
         </div>
       </div>
@@ -33,7 +33,7 @@ const ModalExpand = (props) => {
             Day of the Week
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            5
+            {props.data.dayOfWeek}
           </h5>
         </div>
         <div className='flex items-center justify-between sm:flex-col sm:items-start'>
@@ -41,7 +41,7 @@ const ModalExpand = (props) => {
             Week Number
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            42
+            {props.data.weekNumber}
           </h5>
         </div>
       </div>

@@ -30,4 +30,8 @@
   p {
     @apply font-inter text-[18px] font-normal leading-[28px];
   }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
