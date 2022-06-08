@@ -122,14 +122,18 @@ export default function Home() {
         <link rel='icon' href='/favicon-32x32.png' />
       </Head>
 
-      <main className='relative select-none'>
-        <div className='absolute z-20 flex h-full w-full flex-col justify-end overflow-hidden'>
+      <main className='relative select-none overflow-hidden'>
+        <div
+          className={`absolute z-20 flex h-full w-full flex-col ${
+            menuToggle ? `justify-end` : `justify-between`
+          }`}
+        >
           <div
             className={`${
               menuToggle
                 ? `lg:my-auto lg:pt-0 lg:pb-0`
-                : `h-full lg:pt-14 lg:pb-24`
-            } flex w-full flex-col justify-between px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 md:pt-20 md:pb-16 lg:px-[165px] `}
+                : `h-full justify-between lg:pt-14 lg:pb-24`
+            } flex w-full flex-col  px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 lg:px-[165px] `}
           >
             <div
               className={`${
@@ -154,7 +158,18 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div className='lg:flex lg:items-end lg:justify-between'>
+
+            <div
+              className={`            
+              transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between
+              
+               ${
+                 menuToggle
+                   ? `translate-y-0`
+                   : `translate-y-[256px] sm:translate-y-[440px] lg:translate-y-[400px]`
+               }
+              `}
+            >
               <div>
                 <div className='mb-4 flex items-center'>
                   {day ? (
@@ -180,7 +195,7 @@ export default function Home() {
                 <div className='mb-4'>
                   <h1 className='inline-block align-baseline text-[100px] leading-[100px] text-white md:text-[175px] md:leading-[175px] lg:text-[200px] lg:leading-[200px]'>
                     {worldTime.time}
-                    <span className='font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white md:text-[32px] md:leading-[28px] lg:text-[40px]'>
+                    <span className='pl-2 font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white md:text-[32px] md:leading-[28px] lg:text-[40px]'>
                       {worldTime.abbreviation}
                     </span>
                   </h1>
@@ -197,9 +212,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {menuToggle && (
+          {/* {menuToggle && (
             <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
-          )}{" "}
+          )} */}
+
+          <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
         </div>
         <div className='absolute z-10 h-screen w-full bg-black opacity-40'></div>
 

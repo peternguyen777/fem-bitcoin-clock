@@ -9,6 +9,13 @@ const ModalExpand = (props) => {
         props.menuToggle ? `translate-y-0` : `translate-y-full `
       } z-40 w-full transform py-12 px-[26px] backdrop-blur-sm transition duration-300 ease-out sm:flex sm:py-[120px] sm:pl-[64px] sm:pr-0 lg:py-[74px] lg:pl-[165px]`}
     >
+      {/* <
+      className={`${
+        props.day ? `bg-white/75 text-black` : `bg-black/75 text-white `
+      } ${
+        props.menuToggle ? `translate-y-0` : `translate-y-full `
+      } z-40 w-full transform py-12 px-[26px] backdrop-blur-sm transition duration-300 ease-out sm:flex sm:py-[120px] sm:pl-[64px] sm:pr-0 lg:py-[74px] lg:pl-[165px]`}
+    > */}
       <div className='mb-4 sm:mb-0 sm:mr-20 lg:mr-24 lg:border-r lg:border-charcoal/25 xl:w-[570px]'>
         <div className='mb-4 flex items-center justify-between sm:mb-12 sm:flex-col sm:items-start lg:mb-[42px]'>
           <h6 className='text-[10px] font-normal tracking-[2px] sm:text-[13px] sm:tracking-[2.6px] lg:mb-[9px] lg:text-[15px] lg:leading-[28px] lg:tracking-[3px]'>
