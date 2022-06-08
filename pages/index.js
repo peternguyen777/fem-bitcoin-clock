@@ -98,12 +98,15 @@ export default function Home() {
   }, [fetchTimeHandler]);
 
   useEffect(() => {
-    if (worldTime.ampm === "AM") {
+    let HH = worldTime.time.split(":");
+    let hours = parseFloat(HH);    
+
+    if (hours >= 6 && hours < 18 ) {
       setDay(true);
     } else {
       setDay(false);
     }
-  }, [worldTime.ampm]);
+  }, [worldTime.time]);
 
   const quoteToggleHandler = async () => {
     let randomQuoteInt = Math.floor(Math.random() * quotes.length);
