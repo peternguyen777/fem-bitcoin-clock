@@ -5,6 +5,7 @@ import ButtonSmall from "../components/ButtonSmall";
 import BackgroundImages from "../components/BackgroundImages";
 import ModalExpand from "../components/ModalExpand";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [day, setDay] = useState(false);
@@ -78,7 +79,6 @@ export default function Home() {
       let text = data.timezone;
       let myArray = text.split("/").reverse();
       let timeZone = myArray.join(", ");
-      // let timeZone = myArray[0];
 
       //parse time (eg. 12:44) and AM/PM
       let str = data.datetime;
@@ -181,7 +181,7 @@ export default function Home() {
       <main className='relative select-none overflow-hidden'>
         <div
           className={`absolute z-20 flex h-full w-full flex-col ${
-            menuToggle ? `justify-end` : `justify-between`
+            menuToggle ? `justify-end` : `justify-start`
           }`}
         >
           <div
@@ -196,7 +196,7 @@ export default function Home() {
                 menuToggle && `hidden`
               } flex justify-between lg:justify-start`}
             >
-              <div>
+              <div className='pr-2'>
                 <p className='mb-2 text-[12px] leading-[22px] text-white md:mb-3 md:text-[18px] md:leading-[28px] lg:w-[540px]'>
                   {currentQuote}
                 </p>
@@ -204,14 +204,20 @@ export default function Home() {
                   Satoshi Nakamoto
                 </p>
               </div>
-              <div className='h-[18px]'>
-                <svg
+              <div className=''>
+                <motion.svg
+                  width='18'
+                  height='18'
                   xmlns='http://www.w3.org/2000/svg'
-                  className='ml-4 w-[18px] cursor-pointer fill-[#fff] pt-2 opacity-50 hover:opacity-100'
+                  className='cursor-pointer fill-[#fff] opacity-50 hover:opacity-100'
                   onClick={quoteToggleHandler}
+                  whileHover={{ rotate: 180 }}
+                  transition={{
+                    ease: "easeOut",
+                  }}
                 >
                   <path d='M7.188 10.667a.208.208 0 01.147.355l-2.344 2.206a5.826 5.826 0 009.578-2.488l2.387.746A8.322 8.322 0 013.17 14.94l-2.149 2.022a.208.208 0 01-.355-.148v-6.148h6.52zm7.617-7.63L16.978.958a.208.208 0 01.355.146v6.23h-6.498a.208.208 0 01-.147-.356L13 4.765A5.825 5.825 0 003.43 7.26l-2.386-.746a8.32 8.32 0 0113.76-3.477z' />
-                </svg>
+                </motion.svg>
               </div>
             </div>
             <div className='transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between'>
