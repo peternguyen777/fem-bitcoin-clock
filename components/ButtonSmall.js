@@ -10,7 +10,7 @@ const ButtonSmall = (props) => {
       <h6 className='select-none text-[12px] font-bold leading-[14px] tracking-[3.75px] opacity-50 sm:text-[16px] sm:leading-[28px] sm:tracking-[5px]'>
         {props.expander ? "LESS" : "MORE"}
       </h6>
-      <div className='relative flex h-[32px] w-[32px] items-center justify-center rounded-full bg-charcoal hover:bg-[#999999] sm:h-[40px] sm:w-[40px]'>
+      <div className='relative flex h-[32px] w-[32px] items-center justify-center rounded-full bg-charcoal transition duration-100 ease-out hover:bg-[#999999] sm:h-[40px] sm:w-[40px]'>
         {props.expander ? (
           <svg
             width='40'
