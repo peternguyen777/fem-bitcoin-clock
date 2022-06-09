@@ -19,10 +19,12 @@ const ModalExpand = (props) => {
       <div className='mb-4 sm:mb-0 sm:mr-20 lg:mr-24 lg:border-r lg:border-charcoal/25 xl:w-[570px]'>
         <div className='mb-4 flex items-center justify-between sm:mb-12 sm:flex-col sm:items-start lg:mb-[42px]'>
           <h6 className='text-[10px] font-normal tracking-[2px] sm:text-[13px] sm:tracking-[2.6px] lg:mb-[9px] lg:text-[15px] lg:leading-[28px] lg:tracking-[3px]'>
-            Current Time Zone
+            {props.mode === "timeMode" ? "Current Time Zone" : "Block Height"}
           </h6>
           <h5 className='text-right text-[20px] leading-[24px] sm:text-left sm:text-[40px] sm:leading-[48px] lg:mr-24 lg:text-[56px] lg:leading-[68px] xl:mr-0'>
-            {props.mode === "timeMode" ? props.data.timezone : "Moscow, Russia"}
+            {props.mode === "timeMode"
+              ? props.data.timezone
+              : props.marketData.blockHeight}
           </h5>
         </div>
         <div className='flex items-center justify-between sm:flex-col sm:items-start'>
@@ -34,7 +36,7 @@ const ModalExpand = (props) => {
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
             {props.mode === "timeMode"
               ? props.data.dayOfYear
-              : `$${props.marketData.marketCapUsd}`}
+              : `$${props.marketData.marketCapUsd}B`}
           </h5>
         </div>
       </div>

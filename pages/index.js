@@ -105,9 +105,9 @@ export default function Home() {
     fetchTimeHandler();
   }, [fetchTimeHandler]);
 
-  // setInterval(() => {
-  //   fetchTimeHandler();
-  // }, 15000);
+  setInterval(() => {
+    fetchTimeHandler();
+  }, 30000);
 
   useEffect(() => {
     //parse the time to hours
@@ -140,20 +140,30 @@ export default function Home() {
 
   useEffect(() => {
     const fetchMarketDataHandler = async () => {
-      const response = await fetch(
-        "https://api.coingecko.com/api/v3/coins/bitcoin"
+      const data = await Promise.all([
+        fetch("https://api.coingecko.com/api/v3/coins/bitcoin").then(
+          (response) => response.json()
+        ),
+        fetch("https://blockchain.info/q/getblockcount").then((response) =>
+          response.json()
+        ),
+      ]);
+
+      let satsPerDollar = Math.round(
+        100000000 / data[0].market_data.current_price["usd"]
       );
 
-      const data = await response.json();
+      let satsString = satsPerDollar.toString();
+      let satsTime = satsString.slice(0, 2) + ":" + satsString.slice(2);
 
       const transformedMarketData = {
-        currentPrice:
-          data.market_data.current_price["usd"].toLocaleString("en-US"),
-        satsPerDollar: Math.round(
-          100000000 / data.market_data.current_price["usd"]
+        currentPrice: data[0].market_data.current_price["usd"],
+        satsPerDollar,
+        satsTime,
+        marketCapUsd: parseInt(
+          data[0].market_data.market_cap["usd"] / 1000000000
         ),
-        marketCapUsd:
-          data.market_data.market_cap["usd"].toLocaleString("en-US"),
+        blockHeight: data[1],
       };
 
       setMarketData(transformedMarketData);
@@ -231,9 +241,7 @@ export default function Home() {
                 </div>
                 <div className='mb-4'>
                   <h1 className='inline-block align-baseline text-[100px] leading-[100px] text-white md:text-[175px] md:leading-[175px] lg:text-[200px] lg:leading-[200px]'>
-                    {mode === "timeMode"
-                      ? worldTime.time
-                      : marketData.satsPerDollar}
+                    {mode === "timeMode" ? worldTime.time : marketData.satsTime}
                     <span className='pl-2 font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white md:text-[32px] md:leading-[28px] lg:text-[40px]'>
                       {mode === "timeMode" ? worldTime.abbreviation : "SATS"}
                     </span>
