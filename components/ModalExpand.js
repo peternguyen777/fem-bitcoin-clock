@@ -22,33 +22,41 @@ const ModalExpand = (props) => {
             Current Time Zone
           </h6>
           <h5 className='text-right text-[20px] leading-[24px] sm:text-left sm:text-[40px] sm:leading-[48px] lg:mr-24 lg:text-[56px] lg:leading-[68px] xl:mr-0'>
-            {props.data.timezone}
+            {props.mode === "timeMode" ? props.data.timezone : "Moscow, Russia"}
           </h5>
         </div>
         <div className='flex items-center justify-between sm:flex-col sm:items-start'>
           <h6 className='text-[10px] font-normal tracking-[2px] sm:text-[13px] sm:tracking-[2.6px] lg:mb-[9px] lg:text-[15px] lg:leading-[28px] lg:tracking-[3px]'>
-            Day of the Year
+            {props.mode === "timeMode"
+              ? "Day of the Year"
+              : "Market Capitalization"}
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            {props.data.dayOfYear}
+            {props.mode === "timeMode"
+              ? props.data.dayOfYear
+              : `$${props.marketData.marketCapUsd}`}
           </h5>
         </div>
       </div>
       <div>
         <div className='mb-4 flex items-center justify-between sm:mb-12 sm:flex-col sm:items-start lg:mb-[42px]'>
           <h6 className='text-[10px] font-normal tracking-[2px] sm:text-[13px] sm:tracking-[2.6px] lg:mb-[9px] lg:text-[15px] lg:leading-[28px] lg:tracking-[3px]'>
-            Day of the Week
+            {props.mode === "timeMode" ? "Day of the Week" : "Price per BTC"}
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            {props.data.dayOfWeek}
+            {props.mode === "timeMode"
+              ? props.data.dayOfWeek
+              : `$${props.marketData.currentPrice}`}
           </h5>
         </div>
         <div className='flex items-center justify-between sm:flex-col sm:items-start'>
           <h6 className='text-[10px] font-normal tracking-[2px] sm:text-[13px] sm:tracking-[2.6px] lg:mb-[9px] lg:text-[15px] lg:leading-[28px] lg:tracking-[3px]'>
-            Week Number
+            {props.mode === "timeMode" ? "Week Number" : "Sats per Dollar"}
           </h6>
           <h5 className='text-[20px] leading-[24px] sm:text-[40px] sm:leading-[48px] lg:text-[56px] lg:leading-[68px]'>
-            {props.data.weekNumber}
+            {props.mode === "timeMode"
+              ? props.data.weekNumber
+              : props.marketData.satsPerDollar}
           </h5>
         </div>
       </div>

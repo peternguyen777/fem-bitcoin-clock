@@ -9,9 +9,12 @@ import moment from "moment";
 export default function Home() {
   const [day, setDay] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
+  const [timeOfDay, setTimeOfDay] = useState("");
+  const [mode, setMode] = useState("satsMode");
 
   const [quotes, setQuotes] = useState([]);
   const [worldTime, setWorldTime] = useState({});
+  const [marketData, setMarketData] = useState([]);
 
   const [currentQuote, setCurrentQuote] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +24,12 @@ export default function Home() {
     setMenuToggle(!menuToggle);
   };
 
-  const dayToggleHandler = () => {
-    setDay(!day);
+  const modeToggleHandler = () => {
+    if (mode === "timeMode") {
+      setMode("satsMode");
+    } else if (mode === "satsMode") {
+      setMode("timeMode");
+    }
   };
 
   const fetchQuotesHandler = useCallback(async () => {
@@ -70,8 +77,8 @@ export default function Home() {
       //parse location eg. Sydney, Australia
       let text = data.timezone;
       let myArray = text.split("/").reverse();
-      // let timeZone = myArray.join(", ");
-      let timeZone = myArray[0];
+      let timeZone = myArray.join(", ");
+      // let timeZone = myArray[0];
 
       //parse time (eg. 12:44) and AM/PM
       let str = data.datetime;
@@ -98,14 +105,27 @@ export default function Home() {
     fetchTimeHandler();
   }, [fetchTimeHandler]);
 
-  useEffect(() => {
-    let HH = worldTime.time;
-    let hours = parseFloat(HH);   
+  // setInterval(() => {
+  //   fetchTimeHandler();
+  // }, 15000);
 
-    if (hours >= 6 && hours < 18 ) {
-      setDay(true);
-    } else {
+  useEffect(() => {
+    //parse the time to hours
+    let HH = worldTime.time;
+    let hours = parseFloat(HH);
+
+    if (hours >= 0 && hours < 6) {
       setDay(false);
+      setTimeOfDay("Morning");
+    } else if (hours >= 6 && hours < 12) {
+      setDay(true);
+      setTimeOfDay("Morning");
+    } else if (hours >= 12 && hours < 18) {
+      setDay(true);
+      setTimeOfDay("Afternoon");
+    } else if (hours >= 18) {
+      setDay(false);
+      setTimeOfDay("Evening");
     }
   }, [worldTime.time]);
 
@@ -117,6 +137,30 @@ export default function Home() {
   useEffect(() => {
     quoteToggleHandler();
   }, [quotes]);
+
+  useEffect(() => {
+    const fetchMarketDataHandler = async () => {
+      const response = await fetch(
+        "https://api.coingecko.com/api/v3/coins/bitcoin"
+      );
+
+      const data = await response.json();
+
+      const transformedMarketData = {
+        currentPrice:
+          data.market_data.current_price["usd"].toLocaleString("en-US"),
+        satsPerDollar: Math.round(
+          100000000 / data.market_data.current_price["usd"]
+        ),
+        marketCapUsd:
+          data.market_data.market_cap["usd"].toLocaleString("en-US"),
+      };
+
+      setMarketData(transformedMarketData);
+    };
+
+    fetchMarketDataHandler();
+  }, []);
 
   return (
     <div>
@@ -162,19 +206,8 @@ export default function Home() {
                 </svg>
               </div>
             </div>
-            <div
-              className=
-              // {`            
-              'transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between'
-              
-              //  ${
-              //    menuToggle
-              //      ? ``
-              //      : `translate-y-[256px] sm:translate-y-[440px] lg:translate-y-[400px]`
-              //  }
-              // `}
-            >
-              <div>
+            <div className='transform transition duration-300 ease-out lg:flex lg:items-end lg:justify-between'>
+              <div onClick={modeToggleHandler} className='cursor-pointer'>
                 <div className='mb-4 flex items-center'>
                   {day ? (
                     <Image
@@ -192,20 +225,23 @@ export default function Home() {
                     />
                   )}
                   <h6 className='ml-4 leading-[25px] tracking-[3px] text-white lg:text-[20px] lg:leading-[28px] lg:tracking-[4px]'>
-                    {day ? "Good Morning" : "Good Evening"}
+                    Good {timeOfDay}
                     <span className='hidden md:inline-block'>{`, It's Currently`}</span>
                   </h6>
                 </div>
                 <div className='mb-4'>
                   <h1 className='inline-block align-baseline text-[100px] leading-[100px] text-white md:text-[175px] md:leading-[175px] lg:text-[200px] lg:leading-[200px]'>
-                    {worldTime.time}
+                    {mode === "timeMode"
+                      ? worldTime.time
+                      : marketData.satsPerDollar}
                     <span className='pl-2 font-inter text-[15px] font-light uppercase leading-[28px] tracking-[0px] text-white md:text-[32px] md:leading-[28px] lg:text-[40px]'>
-                      {worldTime.abbreviation}
+                      {mode === "timeMode" ? worldTime.abbreviation : "SATS"}
                     </span>
                   </h1>
                 </div>
                 <h6 className='mb-12 font-bold text-white md:tracking-[3.6px] lg:mb-0 lg:text-[24px] lg:leading-[28px] lg:tracking-[4.8px]'>
-                  in {worldTime.timezone}
+                  in{" "}
+                  {mode === "timeMode" ? worldTime.timezone : "MOSCOW, RUSSIA"}
                 </h6>
               </div>
               <div className='relative'>
@@ -216,15 +252,18 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* {menuToggle && (
-            <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />
-          )} */}
-
-          {menuToggle && <ModalExpand day={day} menuToggle={menuToggle} data={worldTime} />}       
+          {menuToggle && (
+            <ModalExpand
+              day={day}
+              menuToggle={menuToggle}
+              data={worldTime}
+              marketData={marketData}
+              mode={mode}
+            />
+          )}
         </div>
         <div className='absolute z-10 h-screen w-full bg-black opacity-40'></div>
-
-        <BackgroundImages day={day} />
+        {!isLoading && <BackgroundImages day={day} />}
       </main>
 
       <footer></footer>
