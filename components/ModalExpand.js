@@ -23,7 +23,7 @@ const ModalExpand = (props) => {
           </h6>
           <h5 className='text-right text-[20px] leading-[24px] sm:text-left sm:text-[40px] sm:leading-[48px] lg:mr-24 lg:text-[56px] lg:leading-[68px] xl:mr-0'>
             {props.mode === "timeMode"
-              ? props.data.timezone
+              ? props.data.abbreviation
               : props.marketData.blockHeight}
           </h5>
         </div>
