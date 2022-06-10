@@ -55,7 +55,7 @@ const Quote = (props) => {
   return (
     <AnimatePresence>
       {!props.menuToggle && (
-        <div className='absolute z-20 flex w-full landscape:hidden lg:landscape:block'>
+        <div className='absolute z-30 flex w-full landscape:hidden lg:landscape:block'>
           <div className='px-[26px] pt-8 pb-10 md:pl-16 md:pr-32 md:pt-20 md:pb-16 lg:px-[165px]'>
             <motion.div
               className='flex justify-start'
@@ -71,14 +71,14 @@ const Quote = (props) => {
                 initial='hidden'
                 animate='visible'
               >
-                <p className='mb-2 w-[290px] text-[12px] leading-[22px] text-white md:mb-3 md:w-[540px] md:text-[18px] md:leading-[28px]'>
+                <p className='mb-2 w-[290px] text-[12px] leading-[22px] text-white md:mb-3 md:w-[540px] md:text-[16px] md:leading-[26px] lg:text-[18px] lg:leading-[28px]'>
                   {currentQuote.quote}
                 </p>
-                <p className='text-[12px] font-bold leading-[22px] text-white md:text-[18px] md:leading-[28px]'>
+                <p className='text-[12px] font-bold leading-[22px] text-white md:text-[16px] md:leading-[26px] lg:text-[18px] lg:leading-[28px]'>
                   Satoshi Nakamoto
                 </p>
               </motion.div>
-              <div className=''>
+              <div>
                 <motion.svg
                   width='18'
                   height='18'

@@ -79,7 +79,7 @@ const TimeStats = (props) => {
                 width={23}
               />
             )}
-            <h6 className='ml-4 leading-[25px] tracking-[3px] text-white lg:text-[20px] lg:leading-[28px] lg:tracking-[4px]'>
+            <h6 className='ml-4 leading-[25px] tracking-[3px] text-white md:text-[18px] md:leading-[28px] md:tracking-[3.6px] lg:text-[20px] lg:leading-[28px] lg:tracking-[4px]'>
               Good {props.timeOfDay}
               <span className='hidden md:inline-block'>{`, It's Currently`}</span>
             </h6>
@@ -89,7 +89,7 @@ const TimeStats = (props) => {
               {mode === "timeMode" ? props.worldTime.time : marketData.satsTime}
             </h1>
           </div>
-          <h6 className='mb-12 font-bold text-white md:tracking-[3.6px] lg:mb-0 lg:text-[24px] lg:leading-[28px] lg:tracking-[4.8px]'>
+          <h6 className='mb-12 font-bold text-white md:text-[18px] md:leading-[28px] md:tracking-[3.6px] lg:mb-0 lg:text-[24px] lg:leading-[28px] lg:tracking-[4.8px]'>
             in{" "}
             {mode === "timeMode" ? props.worldTime.timezone : "MOSCOW, RUSSIA"}
           </h6>
