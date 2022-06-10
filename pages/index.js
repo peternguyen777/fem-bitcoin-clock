@@ -6,7 +6,7 @@ import Quote from "../components/Quote";
 import TimeStats from "../components/TimeStats";
 
 export default function Home() {
-  const [day, setDay] = useState(false);
+  const [day, setDay] = useState(true);
   const [menuToggle, setMenuToggle] = useState(false);
   const [timeOfDay, setTimeOfDay] = useState("");
   const [worldTime, setWorldTime] = useState({});
@@ -36,20 +36,39 @@ export default function Home() {
       let str = data.datetime;
       let time = moment(str).format("HH:mm");
 
+      //parse day name
+      let dayInWeek = data.day_of_week - 1;
+      let weekday = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ];
+      let dayOfWeek = weekday[dayInWeek];
+
+      //parse date
+      let date = moment(str).format("DD MMMM YYYY");
+
+      //parse UTC Time
+      let utcTime = moment(str).utc().format("HH:mm");
+
       const transformedWorldTime = {
         timezone: timeZone,
-        time: time,
+        time,
+        utcTime,
         abbreviation: data.abbreviation,
-        dayOfYear: data.day_of_year,
-        dayOfWeek: data.day_of_week,
-        weekNumber: data.week_number,
+        date,
+        dayOfWeek,
+        utcOffset: data.utc_offset,
       };
 
       setWorldTime(transformedWorldTime);
     } catch (error) {
       setError(error.message);
     }
-    console.log(error);
   }, []);
 
   useEffect(() => {
