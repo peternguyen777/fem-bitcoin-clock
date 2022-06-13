@@ -36,8 +36,8 @@ export default function Home() {
       let str = data.datetime;
       let time = moment(str).format("HH:mm");
 
-      //parse day name
-      let dayInWeek = data.day_of_week - 1;
+      // let dayInWeek;
+
       let weekday = [
         "Monday",
         "Tuesday",
@@ -47,6 +47,14 @@ export default function Home() {
         "Saturday",
         "Sunday",
       ];
+
+      //parse day name
+      if (data.day_of_week === 0) {
+        var dayInWeek = 6;
+      } else {
+        var dayInWeek = data.day_of_week - 1;
+      }
+
       let dayOfWeek = weekday[dayInWeek];
 
       //parse date
