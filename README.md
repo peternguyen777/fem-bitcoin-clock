@@ -1,6 +1,7 @@
 ![alt text](https://pnguyen-portfolio.vercel.app/detail/desktop/image-clock-hero@2x.jpg)
 
 ### Deployment: https://fem-bitcoin-clock.vercel.app/ ###
+**ReactJS / TailwindCSS / FetchAPI**
 
 ----
 
